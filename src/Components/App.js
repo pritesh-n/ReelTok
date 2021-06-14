@@ -15,7 +15,7 @@ function App() {
           <Route exact path="/">
             <VideoContainer />
           </Route>
-          <Route path="/image-player">
+          <Route exact path="/images">
             <ImageContainer />
           </Route>
         </Switch>

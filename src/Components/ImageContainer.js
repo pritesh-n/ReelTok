@@ -74,7 +74,7 @@ function ImageContainer() {
                     {loading ? (
                       <Image
                         className="lazy"
-                        source={ v.location + '/' + v.filename}
+                        source={ '/'+ v.location + '/' + v.filename}
                       />
                     ) : (
                       <p className="loading-txt">Loading...</p>
