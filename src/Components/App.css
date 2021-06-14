@@ -40,6 +40,9 @@ h2 {
   display: flex;
   justify-content: center;
 }
+.ImageApp{
+  background-color: rgb(241, 241, 241);
+}
 #video-scroll {
   height: 845px;
   position: relative;
@@ -51,6 +54,13 @@ h2 {
 h1 {
   text-align: center;
   z-index: 999;
+}
+
+.loading-txt{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #play-btn {
