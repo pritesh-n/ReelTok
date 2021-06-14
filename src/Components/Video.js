@@ -116,7 +116,7 @@ function Video({ source }) {
           onClick={videoPlay}
           width="450"
           height="900"
-          src={'/Tik-Tok-Clone/'+ source}
+          src={source}
           type="video/mp4"
           preload="auto"
           onCanPlayThrough={canPlay}
@@ -127,7 +127,7 @@ function Video({ source }) {
       )}
       {debouncedSearchTerm ? (
         <audio ref={audioRef}>
-          <source src={'/Tik-Tok-Clone/'+ source} />
+          <source src={source} />
         </audio>
       ) : (
         console.log("audio element is loading")

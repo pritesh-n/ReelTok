@@ -80,7 +80,7 @@ function Image({ source }) {
         <img
           width="auto"
           height="100%"
-          src={'/Tik-Tok-Clone/'+ source}
+          src={source}
         />
       ) : (
         <div className="loading-txt">Loading...</div>
