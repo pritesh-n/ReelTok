@@ -37,19 +37,24 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-function Video({ source }) {
+function Video({ source, videoData, swipeRef }) {
   const [click, setClicked] = useState(false);
   const [count, setCount] = useState();
+  const [edCounter, setEdCounter] = useState(5);
   const [canPlays, setCanPlay] = useState(false);
-  console.log(canPlays);
   const videoRef = useRef();
   const audioRef = useRef(false);
   const playRef = useRef(false);
+  const edTimerRef = useRef(false);
   const ref = useRef();
   const navSec = useRef(null);
 
   const onScreen = useOnScreen(ref);
   const debouncedSearchTerm = useDebounce(onScreen, 400);
+
+  if(videoData.type === 'ad' && edCounter === 5 && onScreen === true){
+    swipeRef.current.style.pointerEvents = "none";
+  }
 
   const clickFunc = () => {
     if (click === false) {
@@ -67,6 +72,18 @@ function Video({ source }) {
 
   useEffect(() => {
     if (debouncedSearchTerm === true && canPlays === true) {
+      if(videoData.type === 'ad' && edCounter === 5){
+        const edTimer = setInterval(() => {
+          setEdCounter((value) => {
+            if(value === 0){
+              swipeRef.current.style.pointerEvents = "all";
+              clearInterval(edTimer);
+            }
+            return value - 1
+          });
+        },1000)
+      }
+
       audioRef.current.currentTime = videoRef.current.currentTime;
       videoRef.current.play();
       audioRef.current.play();
@@ -94,7 +111,7 @@ function Video({ source }) {
       <img ref={playRef} id="play-btn" src="./play.png" alt="play" />
 
       <h1 id="logo">ReelTok</h1>
-
+      {videoData.type === 'video' ?
       <div id="ld">
         <IconButton id="icons" onClick={clickFunc}>
           {click ? (
@@ -104,7 +121,8 @@ function Video({ source }) {
           )}
         </IconButton>
         <span id="like-count">{count}</span>
-      </div>
+      </div> : videoData.type === 'ad' ? <><span className='sponsored-txt'>Sponsored</span> <span className="ed-timer" ref={edTimerRef}>{edCounter >= 0 ? 'Skip in ' + edCounter : ''}</span></> : <></>
+    }
       {debouncedSearchTerm ? (
         <video
           ref={videoRef}
@@ -125,7 +143,7 @@ function Video({ source }) {
           <source src={source} />
         </audio>
       ) : (
-        console.log("audio element is loading")
+        <></>
       )}
     </div>
   );

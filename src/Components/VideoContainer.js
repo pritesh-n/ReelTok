@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./App.css";
 import Video from "./Video";
 import Swiper, { Navigation } from "swiper";
 import "swiper/swiper-bundle.css";
 import videoList from "../video.json";
+import adsList from "../ad.json";
 Swiper.use([Navigation]);
 
 function VideoContainer() {
   const [loading, setload] = useState(null);
   const [data, setData] = useState([
     {
-      video: [],
-      author: [],
-      title: [],
+      video: []
     },
   ]);
+  const swipeRef = useRef(false);
 
   useEffect(() => {
     const mySwiper = new Swiper(".swiper-container", {
@@ -35,8 +35,8 @@ function VideoContainer() {
     function fetchData() {
       const data = videoList.Video;
       const video = [];
-      const author = [];
-      const title = [];
+      let ed_index_counter = 0;
+      const ed_interval_count = 3;
       try {
         for (var i = 0; i < data.length; i++) {
           if (
@@ -44,15 +44,15 @@ function VideoContainer() {
             data[i].length < 45
           ) {
             video.push(data[i]);
-            author.push(data[i].category);
-            title.push(data[i].title);
+            if((i+1) % ed_interval_count === 0){
+              video.push(adsList[ed_index_counter]);
+              ed_index_counter = ed_index_counter === adsList.length - 1 ? 0 : ed_index_counter + 1;
+            }
           }
         }
         setData([
           {
-            video: video,
-            author: author,
-            title: title,
+            video: video
           },
         ]);
         setload(true);
@@ -66,26 +66,31 @@ function VideoContainer() {
   return (
     <div className="App">
       <div id="video-scroll">
-        {data.map(({ video, author, title }) => {
+        {data.map(({ video }) => {
           return (
-            <div className="swiper-container">
+            <div className="swiper-container" ref={swipeRef}>
               <div className="swiper-wrapper">
-                {video.map((v, index) => (
+                {video.map((v) => (
                   <div className="swiper-slide">
                     {loading ? (
                       <Video
                         className="lazy"
                         source={ v.location + '/' + v.filename}
+                        videoData = {v}
+                        swipeRef = {swipeRef}
                       />
                     ) : (
                       <p className="loading-txt">Loading...</p>
                     )}
-                    <p id="author">{author[index]}</p>
+                    {v.type === 'video' ? <>
+                    <p id="author">{v.category}</p>
                     <p id="title">
-                      {title[index].length < 100
-                        ? title[index]
-                        : title[index].substring(0, 100) + "..."}{" "}
+                      {v.title.length < 100
+                        ? v.title
+                        : v.title.substring(0, 100) + "..."}{" "}
                     </p>
+                    <a id="link" href={'//'+v.no_link_attribution_sources} target="_blank" rel="noreferrer">{v.no_link_attribution_sources}</a>
+                    </> : null}
                   </div>
                 ))}
               </div>

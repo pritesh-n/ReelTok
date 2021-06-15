@@ -56,6 +56,23 @@ h1 {
   z-index: 999;
 }
 
+.sponsored-txt{
+  position: absolute;
+  font-size: 20px;
+  bottom: 10px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ed-timer{
+  position: absolute;
+    right: 23px;
+    top: 34px;
+    display: block;
+    color: #3f3f3f;
+    font-size: 20px;
+}
+
 .loading-txt{
   position: absolute;
   top: 50%;
@@ -153,6 +170,15 @@ h1 {
 #btns {
   display: flex;
   justify-content: center;
+}
+#link{
+  z-index: 9999;
+  position: relative;
+  color: #50c3ff;
+  font-family: "Roboto", sans-serif;
+  left: 1em;
+  bottom: 4.3em;
+  font-size: 0.9em;
 }
 
 ::-webkit-scrollbar {
