@@ -263,7 +263,9 @@
             "title": "Wooden sofa makes livingroom shine",
             "tags": "livingroom, sofa, wooden",
             "category": "livingroom"
-        },
+        }
+    ],
+    "Images2" : [
         {
             "type": "image",
             "id": "25",

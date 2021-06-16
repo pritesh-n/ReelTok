@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from '@material-ui/icons/Share';
 
 function useOnScreen(ref) {
   const [isIntersecting, setIntersecting] = useState(false);
@@ -37,7 +38,7 @@ function useDebounce(value, delay) {
   return debouncedValue;
 }
 
-function Image({ source }) {
+function Image({ source, imageData }) {
   const [click, setClicked] = useState(false);
   const [count, setCount] = useState();
   const ref = useRef();
@@ -56,6 +57,18 @@ function Image({ source }) {
     }
   };
 
+  const shareLink = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'ReelTok',
+        text: imageData.title,
+        url: window.location.href,
+      })
+        .then()
+        .catch((error) => console.log('Error sharing', error));
+    }
+  }
+
   return (
     <div id="video-container" ref={ref}>
 
@@ -70,12 +83,16 @@ function Image({ source }) {
           )}
         </IconButton>
         <span id="like-count">{count}</span>
+        <IconButton id="icons" onClick={shareLink}>
+          <ShareIcon style={{ fontSize: "40px" }} />
+        </IconButton>
       </div>
       {debouncedSearchTerm ? (
         <img
           width="auto"
           height="100%"
           src={source}
+          alt={imageData.title}
         />
       ) : (
         <div className="loading-txt">Loading...</div>

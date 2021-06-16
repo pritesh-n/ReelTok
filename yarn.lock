@@ -8895,6 +8895,10 @@ shallowequal@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
 
+share-api-polyfill@^1.0.21:
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/share-api-polyfill/-/share-api-polyfill-1.0.21.tgz#4622249b91cf92439a21148242ea68d23b9322d5"
+
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"

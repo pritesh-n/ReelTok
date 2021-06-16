@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from '@material-ui/icons/Share';
 
 function useOnScreen(ref) {
   const [isIntersecting, setIntersecting] = useState(false);
@@ -66,6 +67,19 @@ function Video({ source, videoData, swipeRef }) {
       console.log(click);
     }
   };
+
+  const shareLink = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'ReelTok',
+        text: videoData.title,
+        url: window.location.href,
+      })
+        .then()
+        .catch((error) => console.log('Error sharing', error));
+    }
+  }
+
   const canPlay = (e) => {
     setCanPlay(true);
   };
@@ -121,6 +135,9 @@ function Video({ source, videoData, swipeRef }) {
           )}
         </IconButton>
         <span id="like-count">{count}</span>
+        <IconButton id="icons" onClick={shareLink}>
+          <ShareIcon style={{ fontSize: "40px" }} />
+        </IconButton>
       </div> : videoData.type === 'ad' ? <><span className='sponsored-txt'>Sponsored</span> <span className="ed-timer" ref={edTimerRef}>{edCounter >= 0 ? 'Skip in ' + edCounter : ''}</span></> : <></>
     }
       {debouncedSearchTerm ? (
