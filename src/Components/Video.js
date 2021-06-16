@@ -135,7 +135,7 @@ function Video({ source, videoData, swipeRef }) {
           )}
         </IconButton>
         <span id="like-count">{count}</span>
-        <IconButton id="icons" onClick={shareLink}>
+        <IconButton id="icons2" onClick={shareLink}>
           <ShareIcon style={{ fontSize: "40px" }} />
         </IconButton>
       </div> : videoData.type === 'ad' ? <><span className='sponsored-txt'>Sponsored</span> <span className="ed-timer" ref={edTimerRef}>{edCounter >= 0 ? 'Skip in ' + edCounter : ''}</span></> : <></>

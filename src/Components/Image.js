@@ -83,7 +83,7 @@ function Image({ source, imageData }) {
           )}
         </IconButton>
         <span id="like-count">{count}</span>
-        <IconButton id="icons" onClick={shareLink}>
+        <IconButton id="icons2" onClick={shareLink}>
           <ShareIcon style={{ fontSize: "40px" }} />
         </IconButton>
       </div>

@@ -113,6 +113,11 @@ h1 {
 #icons {
   color: white;
 }
+#icons2{
+  color: white;
+  position: relative;
+  z-index: 999;
+}
 h1 {
   z-index: 7;
   position: absolute;
