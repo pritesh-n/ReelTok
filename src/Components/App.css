@@ -152,7 +152,7 @@ h1 {
   color: white;
   position: absolute;
   text-align: justify;
-  bottom: -1em;
+  bottom: 60px;
   left: 1.75em;
 }
 #author {
